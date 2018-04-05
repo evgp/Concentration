@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E51B6DC820748887000EFDC6 /* Concentration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51B6DC720748887000EFDC6 /* Concentration.swift */; };
+		E51B6DCA20748C60000EFDC6 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51B6DC920748C60000EFDC6 /* Card.swift */; };
 		E592825D205F54250070A1D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E592825C205F54250070A1D7 /* AppDelegate.swift */; };
 		E592825F205F54250070A1D7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E592825E205F54250070A1D7 /* ViewController.swift */; };
 		E5928262205F54250070A1D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5928260205F54250070A1D7 /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E51B6DC720748887000EFDC6 /* Concentration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
+		E51B6DC920748C60000EFDC6 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		E5928259205F54250070A1D7 /* Concentration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Concentration.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E592825C205F54250070A1D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E592825E205F54250070A1D7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -55,6 +59,8 @@
 			isa = PBXGroup;
 			children = (
 				E592825E205F54250070A1D7 /* ViewController.swift */,
+				E51B6DC720748887000EFDC6 /* Concentration.swift */,
+				E51B6DC920748C60000EFDC6 /* Card.swift */,
 				E5928260205F54250070A1D7 /* Main.storyboard */,
 				E5928268205F54250070A1D7 /* Info.plist */,
 				E592826E205F56BB0070A1D7 /* Supporting files */,
@@ -146,6 +152,8 @@
 			files = (
 				E592825F205F54250070A1D7 /* ViewController.swift in Sources */,
 				E592825D205F54250070A1D7 /* AppDelegate.swift in Sources */,
+				E51B6DC820748887000EFDC6 /* Concentration.swift in Sources */,
+				E51B6DCA20748C60000EFDC6 /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
