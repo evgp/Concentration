@@ -20,8 +20,8 @@ struct Card {
         identifierFactory += 1
         return identifierFactory
     }
-
-//  static method means only use with Type or Class
+    
+    //  static method means only use with Type or Class
     
     init (){
         self.identifier = Card.getUniqueIdentifier()

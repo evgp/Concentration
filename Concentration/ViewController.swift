@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     
     @IBOutlet var cardButtons: [UIButton]!
     
-    var emojiChoices = ["🎃","👻","🤖","👽","🏆","🎹","🎨","🏋️‍♂️","🏀"]
+    var emojiChoices = ["🎃","👻","🤖","👽","🏆","🎹","🎨","🏋️‍♂️","🏀","😀","😃","😄"]
     var emoji = [Int:String]()
     
     @IBAction func touchCard(_ sender: UIButton) {
@@ -36,7 +36,7 @@ class ViewController: UIViewController {
         }
         
     }
-    
+    // MARK: View update after properties changed
     func updateViewFromModel(){
         for index in cardButtons.indices {
             let button = cardButtons[index]
