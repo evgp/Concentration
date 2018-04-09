@@ -10,7 +10,14 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+    lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
+    // MARK: we can use lazy to announce instanse before it would be created. game will be accessible when instance exist
+    
+    var numberOfPairsOfCards: Int {
+        get {
+            return (cardButtons.count + 1) / 2
+        }
+    }
     
     var flipCount = 0 {
         didSet {
