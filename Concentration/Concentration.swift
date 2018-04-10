@@ -16,10 +16,13 @@ class Concentration {
     
     // MARK: example of computed property
     // BTW all vars are properties
-    var indexOfOneAndOnlyFaceUpCard: Int? {
-        // inside {} we're going to implement our computed property
-        
-    }
+    
+    // TODO: Computed indexOfOneAndOnlyFaceUpCard
+    var indexOfOneAndOnlyFaceUpCard: Int?
+    //{
+//        // inside {} we're going to implement our computed property
+//
+//    }
     
     func chooseCard(at index: Int) {
 //        if cards[index].isFaceUp {

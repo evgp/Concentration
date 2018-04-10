@@ -6,6 +6,8 @@
 //  Copyright © 2018 Evg P. All rights reserved.
 //
 
+// TODO: Add "New Game" button wich ends current game in progress and begins a brand new game
+
 import UIKit
 
 class ViewController: UIViewController {
@@ -19,6 +21,9 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    // TODO: Score Label
+    // Tracking the flip count almost certainly does not belong in your Controller in a proper MVC architecture. Fix that.
     var flipCount = 0 {
         didSet {
          flipCountLabel.text = "Flips: \(flipCount)"
@@ -28,6 +33,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var flipCountLabel: UILabel!
     
     @IBOutlet var cardButtons: [UIButton]!
+    
+    // TODO: 6 different themes of emoji set. Game should choose a random theme each time a new game starts.
+    // Architecture must make it possible to add a new theme in a single line of code
     
     var emojiChoices = ["🎃","👻","🤖","👽","🏆","🎹","🎨","🏋️‍♂️","🏀","😀","😃","😄"]
     var emoji = [Int:String]()

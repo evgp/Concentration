@@ -14,6 +14,8 @@
 		E5928262205F54250070A1D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5928260205F54250070A1D7 /* Main.storyboard */; };
 		E5928264205F54250070A1D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5928263205F54250070A1D7 /* Assets.xcassets */; };
 		E5928267205F54250070A1D7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5928265205F54250070A1D7 /* LaunchScreen.storyboard */; };
+		E5B05C90207C791E006F890D /* just_file.txt in Resources */ = {isa = PBXBuildFile; fileRef = E5B05C8F207C791E006F890D /* just_file.txt */; };
+		E5B05C92207C7960006F890D /* concentration.html in Resources */ = {isa = PBXBuildFile; fileRef = E5B05C91207C7960006F890D /* concentration.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		E5928263205F54250070A1D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E5928266205F54250070A1D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E5928268205F54250070A1D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E5B05C8F207C791E006F890D /* just_file.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = just_file.txt; sourceTree = "<group>"; };
+		E5B05C91207C7960006F890D /* concentration.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = concentration.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +46,8 @@
 		E5928250205F54250070A1D7 = {
 			isa = PBXGroup;
 			children = (
+				E5B05C8F207C791E006F890D /* just_file.txt */,
+				E5B05C91207C7960006F890D /* concentration.html */,
 				E592825B205F54250070A1D7 /* Concentration */,
 				E592825A205F54250070A1D7 /* Products */,
 			);
@@ -137,6 +143,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5B05C92207C7960006F890D /* concentration.html in Resources */,
+				E5B05C90207C791E006F890D /* just_file.txt in Resources */,
 				E5928267205F54250070A1D7 /* LaunchScreen.storyboard in Resources */,
 				E5928264205F54250070A1D7 /* Assets.xcassets in Resources */,
 				E5928262205F54250070A1D7 /* Main.storyboard in Resources */,
