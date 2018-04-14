@@ -11,7 +11,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
     // MARK: we can use lazy to announce instanse before it would be created. game will be accessible when instance exist
     
@@ -26,7 +26,7 @@ class ViewController: UIViewController {
     // Tracking the flip count almost certainly does not belong in your Controller in a proper MVC architecture. Fix that.
     var flipCount = 0 {
         didSet {
-         flipCountLabel.text = "Flips: \(flipCount)"
+            flipCountLabel.text = "Flips: \(flipCount)"
         }
     }
     
@@ -37,7 +37,31 @@ class ViewController: UIViewController {
     // TODO: 6 different themes of emoji set. Game should choose a random theme each time a new game starts.
     // Architecture must make it possible to add a new theme in a single line of code
     
-    var emojiChoices = ["🎃","👻","🤖","👽","🏆","🎹","🎨","🏋️‍♂️","🏀","😀","😃","😄"]
+    
+    func cardSkin(_ theme: Int) -> [String] {
+        let cardSkin = theme
+        switch cardSkin {
+        case 1:
+            return ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼","🐨","🐯","🦁","🐮"]
+        case 2:
+            return ["🍏","🍎","🍐","🍊","🍋","🍌","🍉","🍇","🍓","🍈","🍒","🍑"]
+        case 3:
+            return ["⚽️","🏀","🏈","⚾️","🎾","🏐","🏉","🎱","🏓","🏸","🥅","🏒"]
+        case 4:
+            return ["🚗","🚕","🚙","🚌","🚎","🏎","🚓","🚑","🚒","🚐","🚚","🚛"]
+        case 5:
+            return ["⌚️","📱","📲","💻","⌨️","🖥","🖨","🖱","🖲","🕹","🗜","💽"]
+        case 6:
+            return ["😀","😃","😄","😁","😆","😅","😂","🤣","☺️","😊","😇","🙂"]
+        default:
+            return ["🎃","👻","🤖","👽","🏆","🎹","🎨","🏋️‍♂️","🏀","😀","😃","😄"]
+            
+        }
+    }
+    //    let cardSkin = Int(arc4random_uniform(UInt32(6)))
+    
+    
+    lazy var emojiChoices = cardSkin(Int(arc4random_uniform(UInt32(6))))
     var emoji = [Int:String]()
     
     @IBAction func touchCard(_ sender: UIButton) {
@@ -69,27 +93,27 @@ class ViewController: UIViewController {
     
     
     func emoji (for card: Card ) -> String {
-//        if emoji[card.identifier] != nil {
-//            return emoji[card.identifier]!
-//        } else {
-//            return "?"
-//        }
+        //        if emoji[card.identifier] != nil {
+        //            return emoji[card.identifier]!
+        //        } else {
+        //            return "?"
+        //        }
         if emoji[card.identifier] == nil, emojiChoices.count > 0 {
             let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
             emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
         }
         return emoji[card.identifier] ?? "?"
     }
-
-//    func flipCard(withEmoji emoji: String, on button: UIButton) {
-//        if button.currentTitle == emoji {
-//            button.setTitle("", for: UIControlState.normal)
-//            button.backgroundColor = #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
-//        } else {
-//            button.setTitle(emoji, for: UIControlState.normal)
-//            button.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
-//        }
-//    }
+    
+    //    func flipCard(withEmoji emoji: String, on button: UIButton) {
+    //        if button.currentTitle == emoji {
+    //            button.setTitle("", for: UIControlState.normal)
+    //            button.backgroundColor = #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
+    //        } else {
+    //            button.setTitle(emoji, for: UIControlState.normal)
+    //            button.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+    //        }
+    //    }
     
 }
 
