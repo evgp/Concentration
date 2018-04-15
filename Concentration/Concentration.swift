@@ -20,16 +20,28 @@ class Concentration {
     // TODO: Computed indexOfOneAndOnlyFaceUpCard
     var indexOfOneAndOnlyFaceUpCard: Int?
     //{
-//        // inside {} we're going to implement our computed property
-//
-//    }
+    //        // inside {} we're going to implement our computed property
+    //
+    //    }
+    
+    // done ✅: Make shuffle func for known shuffle algorithms
+    func shuffleCards(_ cards: [Card]) -> [Card] {
+        var shuffledCards = [Card]()
+        var cards = cards
+        while cards.count != 0 {
+            let randomIndex = Int(arc4random_uniform(UInt32(cards.count)))
+            shuffledCards.append(cards[randomIndex])
+            cards.remove(at: randomIndex)
+        }
+        return shuffledCards
+    }
     
     func chooseCard(at index: Int) {
-//        if cards[index].isFaceUp {
-//            cards[index].isFaceUp = false
-//        } else {
-//            cards[index].isFaceUp = true
-//        }
+        //        if cards[index].isFaceUp {
+        //            cards[index].isFaceUp = false
+        //        } else {
+        //            cards[index].isFaceUp = true
+        //        }
         if !cards[index].isMatched {
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
                 //check if cards match
@@ -54,8 +66,8 @@ class Concentration {
         for _ in 1...numberOfPairsOfCards {
             let card = Card()
             cards += [card, card]
-            
-            // TODO:  Shuffle the cards
+            // done ✅:  Shuffle the cards
         }
+        cards = shuffleCards(cards)
     }
 }

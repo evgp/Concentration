@@ -34,7 +34,7 @@ class ViewController: UIViewController {
     
     @IBOutlet var cardButtons: [UIButton]!
     
-    // TODO: 6 different themes of emoji set. Game should choose a random theme each time a new game starts.
+    // done ✅: 6 different themes of emoji set. Game should choose a random theme each time a new game starts.
     // Architecture must make it possible to add a new theme in a single line of code
     
     
@@ -63,6 +63,11 @@ class ViewController: UIViewController {
     
     lazy var emojiChoices = cardSkin(Int(arc4random_uniform(UInt32(6))))
     var emoji = [Int:String]()
+    
+    @IBAction func newGame(_ sender: UIButton) {
+        game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
+        updateViewFromModel()
+    }
     
     @IBAction func touchCard(_ sender: UIButton) {
         flipCount += 1
