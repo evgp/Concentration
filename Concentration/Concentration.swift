@@ -48,11 +48,6 @@ class Concentration {
                     score += 2
                     cards[index].seenCount = -1
                     cards[matchIndex].seenCount = 0
-                } else {
-                    if cards[index].seenCount >= 2 {
-                        score -= 3
-                        cards[index].seenCount = -1
-                    }
                 }
                 cards[index].isFaceUp = true
                 indexOfOneAndOnlyFaceUpCard = nil
@@ -65,6 +60,10 @@ class Concentration {
                 indexOfOneAndOnlyFaceUpCard = index
             }
             cards[index].seenCount += 1
+            if cards[index].seenCount >= 2 {
+                score -= 3
+                cards[index].seenCount = -1
+            }
         }
     }
     
