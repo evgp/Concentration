@@ -30,6 +30,8 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var scoreLabel: UILabel!
+    
     @IBOutlet weak var flipCountLabel: UILabel!
     
     @IBOutlet var cardButtons: [UIButton]!
@@ -92,8 +94,8 @@ class ViewController: UIViewController {
                 button.setTitle("", for: UIControlState.normal)
                 button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) : #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
             }
-            
         }
+        scoreLabel.text = "Score: \(game.score)"
     }
     
     

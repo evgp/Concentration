@@ -251,7 +251,8 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="flipCountLabel" destination="xDb-jV-hw6" id="cny-en-qKV"/>
+                        <outlet property="flipCountLabel" destination="xDb-jV-hw6" id="jrj-hW-c7J"/>
+                        <outlet property="scoreLabel" destination="5A3-2f-vC9" id="rcX-vE-Wke"/>
                         <outletCollection property="cardButtons" destination="FQK-Kw-dD3" collectionClass="NSMutableArray" id="4w5-Jr-CG2"/>
                         <outletCollection property="cardButtons" destination="ZIJ-lv-AOy" collectionClass="NSMutableArray" id="ZgK-Ub-w2l"/>
                         <outletCollection property="cardButtons" destination="nf1-m9-Wrq" collectionClass="NSMutableArray" id="EYZ-aL-itm"/>

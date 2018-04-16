@@ -13,6 +13,8 @@ import Foundation
 class Concentration {
     
     var cards = [Card]()
+    var score = 0
+//    var flipCount = 0
     
     // MARK: example of computed property
     // BTW all vars are properties
@@ -23,7 +25,7 @@ class Concentration {
     //        // inside {} we're going to implement our computed property
     //
     //    }
-    
+//    var indexOfScoringCard: Int?
     // done ✅: Make shuffle func for known shuffle algorithms
     func shuffleCards(_ cards: [Card]) -> [Card] {
         var shuffledCards = [Card]()
@@ -39,10 +41,18 @@ class Concentration {
     func chooseCard(at index: Int) {
         if !cards[index].isMatched {
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
-                //check if cards match
+                //check if cards are matched
                 if cards[matchIndex].identifier == cards[index].identifier {
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
+                    score += 2
+                    cards[index].seenCount = -1
+                    cards[matchIndex].seenCount = 0
+                } else {
+                    if cards[index].seenCount >= 2 {
+                        score -= 3
+                        cards[index].seenCount = -1
+                    }
                 }
                 cards[index].isFaceUp = true
                 indexOfOneAndOnlyFaceUpCard = nil
@@ -54,6 +64,7 @@ class Concentration {
                 cards[index].isFaceUp = true
                 indexOfOneAndOnlyFaceUpCard = index
             }
+            cards[index].seenCount += 1
         }
     }
     
