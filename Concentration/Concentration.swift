@@ -60,7 +60,7 @@ class Concentration {
                 indexOfOneAndOnlyFaceUpCard = index
             }
             cards[index].seenCount += 1
-            if cards[index].seenCount >= 2 {
+            if cards[index].seenCount > 2 {
                 score -= 3
                 cards[index].seenCount = -1
             }

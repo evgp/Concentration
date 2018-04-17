@@ -15,14 +15,19 @@ class ViewController: UIViewController {
     lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
     // MARK: we can use lazy to announce instanse before it would be created. game will be accessible when instance exist
     
+//    var numberOfPairsOfCards: Int {
+//        get {
+//            return (cardButtons.count + 1) / 2
+//        }
+//    }
+
+    
+    // MARK: Read-only property could be implemented like that, with no get and set
     var numberOfPairsOfCards: Int {
-        get {
-            return (cardButtons.count + 1) / 2
-        }
+       return (cardButtons.count + 1) / 2
     }
     
-    
-    // TODO: Score Label
+    // done ✅: Score Label
     // Tracking the flip count almost certainly does not belong in your Controller in a proper MVC architecture. Fix that.
     var flipCount = 0 {
         didSet {
