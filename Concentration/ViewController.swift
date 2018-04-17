@@ -12,7 +12,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
+   private lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
     // MARK: we can use lazy to announce instanse before it would be created. game will be accessible when instance exist
     
 //    var numberOfPairsOfCards: Int {
@@ -23,29 +23,30 @@ class ViewController: UIViewController {
 
     
     // MARK: Read-only property could be implemented like that, with no get and set
-    var numberOfPairsOfCards: Int {
+    var numberOfPairsOfCards: Int { //private(set) set this var is private, but not need to modify, because of read-only property
        return (cardButtons.count + 1) / 2
     }
     
     // done ✅: Score Label
     // Tracking the flip count almost certainly does not belong in your Controller in a proper MVC architecture. Fix that.
-    var flipCount = 0 {
+    private(set) var flipCount = 0 { // don't get people to set flipCount
         didSet {
             flipCountLabel.text = "Flips: \(flipCount)"
         }
     }
     
-    @IBOutlet weak var scoreLabel: UILabel!
+    // outlets are always private, because it's always kind of internal implementation
+    @IBOutlet private weak var scoreLabel: UILabel!
     
-    @IBOutlet weak var flipCountLabel: UILabel!
+    @IBOutlet private weak var flipCountLabel: UILabel!
     
-    @IBOutlet var cardButtons: [UIButton]!
+    @IBOutlet private var cardButtons: [UIButton]!
     
     // done ✅: 6 different themes of emoji set. Game should choose a random theme each time a new game starts.
     // Architecture must make it possible to add a new theme in a single line of code
     
     
-    func cardSkin(_ theme: Int) -> [String] {
+    private func cardSkin(_ theme: Int) -> [String] {
         let cardSkin = theme
         switch cardSkin {
         case 1:
@@ -68,16 +69,16 @@ class ViewController: UIViewController {
     //    let cardSkin = Int(arc4random_uniform(UInt32(6)))
     
     
-    lazy var emojiChoices = cardSkin(Int(arc4random_uniform(UInt32(6))))
-    var emoji = [Int:String]()
+    private lazy var emojiChoices = cardSkin(Int(arc4random_uniform(UInt32(6))))
+    private var emoji = [Int:String]()
     
     // TODO: sometimes emoji doesn't showed. ? instead
-    @IBAction func newGame(_ sender: UIButton) {
+    @IBAction private func newGame(_ sender: UIButton) {
         game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
         updateViewFromModel()
     }
     
-    @IBAction func touchCard(_ sender: UIButton) {
+    @IBAction private func touchCard(_ sender: UIButton) {
         flipCount += 1
         if let cardNumber = cardButtons.index(of: sender) {
             game.chooseCard(at: cardNumber)
@@ -89,7 +90,7 @@ class ViewController: UIViewController {
         
     }
     // MARK: View update after properties changed
-    func updateViewFromModel(){
+    private func updateViewFromModel(){
         for index in cardButtons.indices {
             let button = cardButtons[index]
             let card = game.cards[index]
@@ -104,16 +105,17 @@ class ViewController: UIViewController {
         scoreLabel.text = "Score: \(game.score)"
     }
     
-    
-    func emoji (for card: Card ) -> String {
+    // the design approach is make everything private and then decide what to make public.
+    private func emoji (for card: Card ) -> String {
         //        if emoji[card.identifier] != nil {
         //            return emoji[card.identifier]!
         //        } else {
         //            return "?"
         //        }
         if emoji[card.identifier] == nil, emojiChoices.count > 0 {
-            let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
-            emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
+            //let randomIndex = emojiChoices.count.arc4random we use extension of Int now, so
+//            emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
+            emoji[card.identifier] = emojiChoices.remove(at: emojiChoices.count.arc4random)
         }
         return emoji[card.identifier] ?? "?"
     }
@@ -129,4 +131,9 @@ class ViewController: UIViewController {
     //    }
     
 }
-
+// let x = 5.arc4random. - extansion for Int, 5 is the "self"
+extension Int {
+    var arc4random: Int {
+        return Int(arc4random_uniform(UInt32(self)))
+    }
+}

@@ -12,7 +12,7 @@ import Foundation
 
 class Concentration {
     
-    var cards = [Card]()
+    private(set) var cards = [Card]() //you can look for card, but i am responsable for setting it faceUp and matched
     var score = 0
     //    var flipCount = 0
     
@@ -20,14 +20,14 @@ class Concentration {
     // BTW all vars are properties
     
     // done ✅: Computed indexOfOneAndOnlyFaceUpCard
-    var indexOfOneAndOnlyFaceUpCard: Int? {
+    private var indexOfOneAndOnlyFaceUpCard: Int? {
         //{
         //        // inside {} we're going to implement our computed property
         //
         //    }
         //    var indexOfScoringCard: Int?
         get {
-            var foundIndex: Int? // [= nil] default
+            var foundIndex: Int? // [= nil] default value
             for index in cards.indices {
                 if cards[index].isFaceUp {
                     if foundIndex == nil {
@@ -41,6 +41,7 @@ class Concentration {
         }
         // newValue - this is just local varible inside here that contains new value that someone set to indexOfOneAndOnlyFaceUpCard. Default to "newValue"
         //        set(newValue) { the name is totally up to you
+        // if it does a lot of work make it a func
         set {
             for index in cards.indices {
                 cards[index].isFaceUp = (index == newValue) // if index == newValue this is the one card FaceUp and return true, otherwise - false.
@@ -49,7 +50,7 @@ class Concentration {
     }
     
     // done ✅: Make shuffle func for known shuffle algorithms
-    func shuffleCards(_ cards: [Card]) -> [Card] {
+    private func shuffleCards(_ cards: [Card]) -> [Card] {
         var shuffledCards = [Card]()
         var cards = cards
         while cards.count != 0 {
@@ -61,6 +62,7 @@ class Concentration {
     }
     
     func chooseCard(at index: Int) {
+        assert(cards.indices.contains(index), "Concentration.chooseCard at \(index): choosen index not in the cards ") //assertation func have to be true, if not - program crashes with assertation message
         if !cards[index].isMatched {
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
                 //check if cards are matched
@@ -90,6 +92,8 @@ class Concentration {
     }
     
     init (numberOfPairsOfCards: Int) {
+        assert(numberOfPairsOfCards > 0, "Concentration.init at \(numberOfPairsOfCards): choosen number not > 0 ")
+        // MARK: making things private and using assert you can provide a proper use of the code
         for _ in 1...numberOfPairsOfCards {
             let card = Card()
             cards += [card, card]

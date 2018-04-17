@@ -15,14 +15,14 @@ struct Card {
     var seenCount = 0
     var identifier: Int
     
-    static var identifierFactory = 0
+    private static var identifierFactory = 0
     
-    static func getUniqueIdentifier() -> Int {
+    private static func getUniqueIdentifier() -> Int {
         identifierFactory += 1
         return identifierFactory
     }
     
-    //  static method means only use with Type or Class
+    //  static method means only use with Type or Class, not with instance
     
     init (){
         self.identifier = Card.getUniqueIdentifier()
