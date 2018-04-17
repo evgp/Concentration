@@ -14,18 +14,40 @@ class Concentration {
     
     var cards = [Card]()
     var score = 0
-//    var flipCount = 0
+    //    var flipCount = 0
     
     // MARK: example of computed property
     // BTW all vars are properties
     
-    // TODO: Computed indexOfOneAndOnlyFaceUpCard
-    var indexOfOneAndOnlyFaceUpCard: Int?
-    //{
-    //        // inside {} we're going to implement our computed property
-    //
-    //    }
-//    var indexOfScoringCard: Int?
+    // done ✅: Computed indexOfOneAndOnlyFaceUpCard
+    var indexOfOneAndOnlyFaceUpCard: Int? {
+        //{
+        //        // inside {} we're going to implement our computed property
+        //
+        //    }
+        //    var indexOfScoringCard: Int?
+        get {
+            var foundIndex: Int? // [= nil] default
+            for index in cards.indices {
+                if cards[index].isFaceUp {
+                    if foundIndex == nil {
+                        foundIndex = index  // if this is first opened card
+                    } else {
+                        return nil          // if this is second opened card
+                    }
+                }
+            }
+            return foundIndex
+        }
+        // newValue - this is just local varible inside here that contains new value that someone set to indexOfOneAndOnlyFaceUpCard. Default to "newValue"
+        //        set(newValue) { the name is totally up to you
+        set {
+            for index in cards.indices {
+                cards[index].isFaceUp = (index == newValue) // if index == newValue this is the one card FaceUp and return true, otherwise - false.
+            }
+        }
+    }
+    
     // done ✅: Make shuffle func for known shuffle algorithms
     func shuffleCards(_ cards: [Card]) -> [Card] {
         var shuffledCards = [Card]()
@@ -50,13 +72,13 @@ class Concentration {
                     cards[matchIndex].seenCount = 0
                 }
                 cards[index].isFaceUp = true
-                indexOfOneAndOnlyFaceUpCard = nil
+                //                indexOfOneAndOnlyFaceUpCard = nil             ---not need, because property is computed
             } else {
                 // either no cards or 2 cards are face up
-                for flipDownIndex in cards.indices {
-                    cards[flipDownIndex].isFaceUp = false
-                }
-                cards[index].isFaceUp = true
+                //                for flipDownIndex in cards.indices {          ---not need, because property is computed
+                //                    cards[flipDownIndex].isFaceUp = false
+                //                }
+                //                cards[index].isFaceUp = true
                 indexOfOneAndOnlyFaceUpCard = index
             }
             cards[index].seenCount += 1

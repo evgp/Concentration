@@ -71,6 +71,7 @@ class ViewController: UIViewController {
     lazy var emojiChoices = cardSkin(Int(arc4random_uniform(UInt32(6))))
     var emoji = [Int:String]()
     
+    // TODO: sometimes emoji doesn't showed. ? instead
     @IBAction func newGame(_ sender: UIButton) {
         game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
         updateViewFromModel()
