@@ -10,8 +10,8 @@
 
 import Foundation
 
-class Concentration {
-    
+struct Concentration {
+
     private(set) var cards = [Card]() //you can look for card, but i am responsable for setting it faceUp and matched
     var score = 0
     //    var flipCount = 0
@@ -48,20 +48,23 @@ class Concentration {
             }
         }
     }
+    //if property is settable, swift knows it's mutating already, else, if gettable only, it needs to set mutating modifier
+    
     
     // done ✅: Make shuffle func for known shuffle algorithms
     private func shuffleCards(_ cards: [Card]) -> [Card] {
         var shuffledCards = [Card]()
         var cards = cards
         while cards.count != 0 {
-            let randomIndex = Int(arc4random_uniform(UInt32(cards.count)))
+//            let randomIndex = Int(arc4random_uniform(UInt32(cards.count)))
+            let randomIndex = cards.count.arc4random
             shuffledCards.append(cards[randomIndex])
             cards.remove(at: randomIndex)
         }
         return shuffledCards
     }
     
-    func chooseCard(at index: Int) {
+    mutating func chooseCard(at index: Int) {
         assert(cards.indices.contains(index), "Concentration.chooseCard at \(index): choosen index not in the cards ") //assertation func have to be true, if not - program crashes with assertation message
         if !cards[index].isMatched {
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
