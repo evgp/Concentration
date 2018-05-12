@@ -31,12 +31,26 @@ class ViewController: UIViewController {
     // Tracking the flip count almost certainly does not belong in your Controller in a proper MVC architecture. Fix that.
     private(set) var flipCount = 0 { // don't get people to set flipCount
         didSet {
-            flipCountLabel.text = "Flips: \(flipCount)"
+            // MARK: lecture 4 1.03.51
+            flipCountLabel.attributedText = updateScoreLabel()
         }
     }
     
+    private func updateScoreLabel() -> NSAttributedString {
+        let attributes: [NSAttributedStringKey: Any] = [
+            .strokeWidth : 5.0,
+            .strokeColor : #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+        ]
+        let attributedString = NSAttributedString(string: "Flips: \(flipCount)", attributes: attributes)
+        return attributedString
+    }
+    
     // outlets are always private, because it's always kind of internal implementation
-    @IBOutlet private weak var scoreLabel: UILabel!
+    @IBOutlet private weak var scoreLabel: UILabel! {
+        didSet {
+            flipCountLabel.attributedText = updateScoreLabel()
+        }
+    }
     
     @IBOutlet private weak var flipCountLabel: UILabel!
     
@@ -46,37 +60,38 @@ class ViewController: UIViewController {
     // Architecture must make it possible to add a new theme in a single line of code
     
     
-    private func cardSkin(_ theme: Int) -> [String] {
-        let cardSkin = theme
-        switch cardSkin {
-        case 1:
-            return ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼","🐨","🐯","🦁","🐮"]
-        case 2:
-            return ["🍏","🍎","🍐","🍊","🍋","🍌","🍉","🍇","🍓","🍈","🍒","🍑"]
-        case 3:
-            return ["⚽️","🏀","🏈","⚾️","🎾","🏐","🏉","🎱","🏓","🏸","🥅","🏒"]
-        case 4:
-            return ["🚗","🚕","🚙","🚌","🚎","🏎","🚓","🚑","🚒","🚐","🚚","🚛"]
-        case 5:
-            return ["⌚️","📱","📲","💻","⌨️","🖥","🖨","🖱","🖲","🕹","🗜","💽"]
-        case 6:
-            return ["😀","😃","😄","😁","😆","😅","😂","🤣","☺️","😊","😇","🙂"]
-        default:
-            return ["🎃","👻","🤖","👽","🏆","🎹","🎨","🏋️‍♂️","🏀","😀","😃","😄"]
-            
-        }
+    private func cardSkin(_ theme: Int) -> String {
+//        let cardSkin = theme
+//        switch cardSkin {
+//        case 1:
+//            return ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼","🐨","🐯","🦁","🐮"]
+//        case 2:
+//            return ["🍏","🍎","🍐","🍊","🍋","🍌","🍉","🍇","🍓","🍈","🍒","🍑"]
+//        case 3:
+//            return ["⚽️","🏀","🏈","⚾️","🎾","🏐","🏉","🎱","🏓","🏸","🥅","🏒"]
+//        case 4:
+//            return ["🚗","🚕","🚙","🚌","🚎","🏎","🚓","🚑","🚒","🚐","🚚","🚛"]
+//        case 5:
+//            return ["⌚️","📱","📲","💻","⌨️","🖥","🖨","🖱","🖲","🕹","🗜","💽"]
+//        case 6:
+//            return ["😀","😃","😄","😁","😆","😅","😂","🤣","☺️","😊","😇","🙂"]
+//        default:
+//            return ["🎃","👻","🤖","👽","🏆","🎹","🎨","🏋️‍♂️","🏀","😀","😃","😄"]
+//
+//        }
+        return "🎃👻🤖👽🏆🎹🎨🏋️‍♂️🏀😀😃😄"
     }
     //    let cardSkin = Int(arc4random_uniform(UInt32(6)))
     
     
     private lazy var emojiChoices = cardSkin(Int(arc4random_uniform(UInt32(6))))
-    private var emoji = [Int:String]()
+    private var emoji = [Card:String]()
     
     // TODO: sometimes emoji doesn't showed. ? instead
     @IBAction private func newGame(_ sender: UIButton) {
         game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
         emojiChoices = cardSkin(Int(arc4random_uniform(UInt32(6))))
-        emoji = [Int:String]()
+        emoji = [Card:String]()
         updateViewFromModel()
     }
     
@@ -114,12 +129,16 @@ class ViewController: UIViewController {
         //        } else {
         //            return "?"
         //        }
-        if emoji[card.identifier] == nil, emojiChoices.count > 0 {
+        if emoji[card] == nil, emojiChoices.count > 0 {
             //let randomIndex = emojiChoices.count.arc4random we use extension of Int now, so
 //            emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
-            emoji[card.identifier] = emojiChoices.remove(at: emojiChoices.count.arc4random)
+            let randomStartIndex = emojiChoices.index(emojiChoices.startIndex, offsetBy: emojiChoices.count.arc4random)
+            emoji[card] = String(emojiChoices.remove(at: randomStartIndex))
         }
-        return emoji[card.identifier] ?? "?"
+        
+        // MARK: Strings are indexed by String.Index type, not by Int!
+        
+        return emoji[card] ?? "?"
     }
     
     //    func flipCard(withEmoji emoji: String, on button: UIButton) {
